@@ -1,0 +1,410 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Christian Potayre | Portfolio</title>
+
+<style>
+/* ===== RESET ===== */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 80px; /* ensures sections appear below navbar */
+}
+
+body {
+  font-family: 'Segoe UI', sans-serif;
+  background: #f3f1f9;
+  color: #2d2a32;
+}
+
+/* ===== NAVBAR ===== */
+nav {
+  position: fixed;
+  top: 0;
+  width: 100%;
+  background: linear-gradient(90deg, #5f2c82, #49a09d);
+  z-index: 1000;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.35);
+}
+
+.nav-container {
+  max-width: 1100px;
+  margin: auto;
+  padding: 12px 25px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.brand a {
+  color: #ffffff;
+  font-size: 1.7rem;
+  font-weight: bold;
+  text-decoration: none;
+}
+
+nav ul {
+  display: flex;
+  list-style: none;
+  gap: 25px;
+}
+
+nav ul li a {
+  color: #ffffff;
+  text-decoration: none;
+  font-weight: bold;
+  position: relative;
+}
+
+nav ul li a::after {
+  content: '';
+  position: absolute;
+  bottom: -4px;
+  left: 0;
+  width: 0;
+  height: 2px;
+  background: #ffd369;
+  transition: 0.3s;
+}
+
+nav ul li a:hover::after,
+nav ul li a.active::after {
+  width: 100%;
+}
+
+.hamburger {
+  display: none;
+  font-size: 2rem;
+  background: none;
+  border: none;
+  color: white;
+  cursor: pointer;
+}
+
+/* ===== SECTIONS ===== */
+section {
+  min-height: 100vh;
+  padding: 120px 20px 80px;
+  opacity: 0;
+  transform: translateY(30px);
+  transition: 1s ease;
+}
+
+section.appear {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+section:nth-child(even) {
+  background: linear-gradient(to right, #ffffff, #ede7f6);
+}
+section:nth-child(odd) {
+  background: linear-gradient(to right, #f7f5fb, #e6e0f3);
+}
+
+section h2 {
+  text-align: center;
+  font-size: 2.3rem;
+  margin-bottom: 30px;
+  color: #5f2c82;
+}
+
+/* ===== HOME ===== */
+.profile-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: calc(100vh - 80px);
+  padding: 20px;
+}
+
+.profile {
+  display: flex;
+  align-items: center;
+  gap: 40px;
+}
+
+.profile-pic {
+  width: 220px;
+  height: 220px;
+  object-fit: cover;
+  border-radius: 50%;
+  border: 5px solid #5f2c82;
+  box-shadow: 0 12px 30px rgba(0,0,0,0.35);
+  transition: 0.4s;
+}
+
+.profile-pic:hover {
+  transform: scale(1.08) rotate(2deg);
+}
+
+.profile-text h1 {
+  font-size: 2.8rem;
+  color: #3d1c5a;
+  margin-bottom: 10px;
+}
+
+.profile-text p {
+  font-size: 1.2rem;
+  color: #555;
+  line-height: 1.7;
+}
+
+/* ===== ABOUT & OBJECTIVE ===== */
+#about, #objective {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 0 20px;
+}
+
+#about p, #objective p {
+  background: #ffffff;
+  padding: 15px 25px;
+  margin: 8px 0;
+  border-radius: 14px;
+  max-width: 700px;
+  box-shadow: 0 6px 18px rgba(0,0,0,0.2);
+  border-left: 6px solid #49a09d;
+  word-wrap: break-word;
+}
+
+/* ===== SKILLS ===== */
+.skills {
+  text-align: center;
+  padding: 0 10px;
+}
+
+.skills p {
+  display: inline-block;
+  margin: 10px;
+  padding: 12px 24px;
+  border-radius: 30px;
+  background: linear-gradient(135deg, #5f2c82, #49a09d);
+  color: #ffffff;
+  font-weight: bold;
+  box-shadow: 0 6px 15px rgba(0,0,0,0.25);
+  transition: 0.3s;
+}
+
+.skills p:hover {
+  transform: translateY(-6px) scale(1.06);
+}
+
+/* ===== PROJECTS ===== */
+.projects {
+  text-align: center;
+  padding: 0 10px;
+}
+
+.projects p {
+  background: #ffffff;
+  max-width: 500px;
+  width: 100%;
+  margin: 15px auto;
+  padding: 20px;
+  border-radius: 16px;
+  border-left: 6px solid #5f2c82;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.25);
+  transition: 0.3s;
+}
+
+.projects p:hover {
+  transform: translateY(-10px);
+}
+
+/* ===== CONTACT ===== */
+#contact {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 0 10px;
+}
+
+#contact p {
+  background: #ffffff;
+  padding: 15px 25px;
+  margin: 10px 0;
+  border-radius: 14px;
+  box-shadow: 0 6px 18px rgba(0,0,0,0.2);
+  border-left: 6px solid #49a09d;
+  word-wrap: break-word;
+}
+
+/* ===== FOOTER ===== */
+footer {
+  background: linear-gradient(90deg, #3d1c5a, #5f2c82);
+  color: white;
+  text-align: center;
+  padding: 40px 20px;
+}
+
+/* ===== MOBILE ===== */
+@media (max-width: 768px) {
+  .hamburger { display: block; }
+
+  nav ul {
+    position: fixed;
+    top: 65px;
+    right: -100%;
+    width: 230px;
+    height: calc(100% - 65px);
+    background: #3d1c5a;
+    flex-direction: column;
+    padding-top: 30px;
+    transition: 0.3s;
+  }
+
+  nav ul.active { right: 0; }
+
+  .profile {
+    flex-direction: column;
+    text-align: center;
+    gap: 20px;
+  }
+
+  .profile-pic {
+    width: 180px;
+    height: 180px;
+  }
+
+  .profile-text h1 {
+    font-size: 2rem;
+  }
+
+  .profile-text p {
+    font-size: 1rem;
+  }
+
+  section h2 {
+    font-size: 2rem;
+    margin-bottom: 20px;
+  }
+
+  .skills p, .projects p, #about p, #objective p, #contact p {
+    padding: 12px 18px;
+    font-size: 0.95rem;
+  }
+}
+</style>
+</head>
+
+<body>
+
+<nav>
+  <div class="nav-container">
+    <div class="brand"><a href="#home">My Portfolio</a></div>
+    <button class="hamburger">&#9776;</button>
+    <ul class="nav-links">
+      <li><a href="#home" class="active">Home</a></li>
+      <li><a href="#about">About</a></li>
+      <li><a href="#objective">Objective</a></li>
+      <li><a href="#skills">Skills</a></li>
+      <li><a href="#projects">Projects</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+  </div>
+</nav>
+
+<section id="home">
+  <div class="profile-wrapper">
+    <div class="profile">
+      <img src="potay.jpg" class="profile-pic" alt="Profile">
+      <div class="profile-text">
+        <h1>Christian Potayre</h1>
+        <p>3rd-year BSIT student | Focused on web development, UI/UX, and interactive design</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="about">
+  <h2>Personal Information</h2>
+  <p>Name: Christian Potayre</p>
+  <p>Course: Bachelor of Science in Information Technology</p>
+  <p>Year: 3rd Year</p>
+</section>
+
+<section id="objective">
+  <h2>Objective</h2>
+  <p>To apply my knowledge and skills in information technology by developing innovative, efficient, and scalable web and software solutions. I aim to contribute to projects that enhance user experiences while continuously improving my technical expertise in real-world applications.</p>
+</section>
+
+<section id="skills" class="skills">
+  <h2>Skills</h2>
+  <p>HTML</p>
+  <p>CSS</p>
+  <p>JavaScript</p>
+  <p>Responsive Design</p>
+  <p>UI / UX</p>
+</section>
+
+<section id="projects" class="projects">
+  <h2>Projects</h2>
+  <p>Carlitos Ordering System</p>
+  <p>HIV Dashboard</p>
+  <p>Basic Calculator</p>
+</section>
+
+<section id="contact">
+  <h2>Contact</h2>
+  <p>Email: potayrexd4@gmail.com</p>
+  <p>Instagram: Tian Potayre</p>
+</section>
+
+<footer>
+  <p>&copy; 2026 Christian Potayre. All rights reserved.</p>
+</footer>
+
+<script>
+// Mobile menu toggle
+const hamburger = document.querySelector('.hamburger');
+const navLinks = document.querySelector('.nav-links');
+hamburger.addEventListener('click', () => navLinks.classList.toggle('active'));
+
+// Close menu on link click
+document.querySelectorAll('.nav-links a').forEach(link => {
+  link.addEventListener('click', e => {
+    navLinks.classList.remove('active');
+
+    // Smooth scroll with offset for fixed navbar
+    const target = document.querySelector(link.getAttribute('href'));
+    if(target){
+      window.scrollTo({
+        top: target.offsetTop - 70,
+        behavior: 'smooth'
+      });
+      e.preventDefault();
+    }
+  });
+});
+
+// Highlight active section
+const sections = document.querySelectorAll('section');
+const navItems = document.querySelectorAll('.nav-links a');
+window.addEventListener('scroll', () => {
+  let current = '';
+  sections.forEach(section => {
+    if (pageYOffset >= section.offsetTop - 150) current = section.id;
+  });
+  navItems.forEach(link => {
+    link.classList.toggle('active', link.getAttribute('href') === '#' + current);
+  });
+});
+
+// Intersection Observer for appear animation
+const observer = new IntersectionObserver(entries => {
+  entries.forEach(entry => entry.isIntersecting && entry.target.classList.add('appear'));
+}, { threshold: 0.2 });
+sections.forEach(section => observer.observe(section));
+</script>
+
+</body>
+</html>
